@@ -1,5 +1,5 @@
 
-using BlazorStudy.Server.ModelDbContext;
+using BlazorStudy.Server;
 
 var builder = WebApplication.CreateBuilder(args);
 
