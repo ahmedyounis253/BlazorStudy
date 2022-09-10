@@ -1,12 +1,15 @@
-﻿namespace BlazorStudy.Server.ModelDbContext
+﻿using BlazorStudy.Server.EntityConfiguration;
+
+namespace BlazorStudy.Server;
+
+public class ApplicationDbContext:DbContext
 {
-    public class ApplicationDbContext:DbContext
+    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
-     
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            base.OnConfiguring(optionsBuilder);
-        }
+        modelBuilder.ApplyConfiguration(new UserEntityConfiguration())
+                    .ApplyConfiguration(new MessageEntityConfiguration())
+                    .ApplyConfiguration(new ContactEntityConfiguration());
     }
 }
