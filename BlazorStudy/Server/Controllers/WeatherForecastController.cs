@@ -1,6 +1,3 @@
-using BlazorStudy.Shared;
-using Microsoft.AspNetCore.Mvc;
-
 namespace BlazorStudy.Server.Controllers
 {
     [ApiController]

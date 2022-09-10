@@ -1,18 +1,25 @@
-using Microsoft.AspNetCore.ResponseCompression;
+
+using BlazorStudy.Server.ModelDbContext;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+string ConnectionString = builder.Configuration.GetConnectionString("Default");
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
 
+builder.Services.AddDbContext<ApplicationDbContext>(Db => Db.UseSqlServer(ConnectionString)
+                                                            .EnableDetailedErrors()
+                                                            .EnableSensitiveDataLogging()
+                                                            .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking));
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseWebAssemblyDebugging();
+
 }
 else
 {
